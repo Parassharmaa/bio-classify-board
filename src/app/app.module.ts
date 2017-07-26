@@ -6,6 +6,8 @@ import { BioCardComponent } from './components/bio-card/bio-card.component';
 import { MaterialModule} from '@angular/material';
 import { BioService } from './service/bio.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule }   from '@angular/forms';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule, 
     MaterialModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
   	BioService

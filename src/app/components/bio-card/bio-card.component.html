@@ -1,32 +1,32 @@
-<md-card>
-   <md-card-header>
-    <md-card-title>{{ predata.user_id }}</md-card-title>
-    <md-card-subtitle>Bio</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>
-      {{ pre_data.bio }}
-    </p>
-  </md-card-content>
-  <hr>
+<md-card *ngIf="pre_data==null">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+  </md-card>
+  <md-card *ngIf="pre_data!=null">
+    <md-card-header>
+      <md-card-title class="bold">@{{ pre_data.screen_name }}</md-card-title>
+      <md-card-subtitle>Bio</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>
+        {{ pre_data.bio }}
+      </p>
 
-  <table class="full-width" cellspacing="0">
-  <tr>
-    <td>
-      <md-select placeholder="Options">
-        <md-option *ngFor="let target of pre_data.targets" [value]="target">
-          {{target}}
-        </md-option>
-      </md-select>
-    </td>
-    <td>
-      <md-input-container class="full-width">
-        <input mdInput placeholder="Other">
-      </md-input-container>
-    </td>
-    <td>
-    <button md-raised-button>Save</button>
-    </td>
-  </tr>
-  </table>
+      <p *ngIf="pre_data.bio.length==0">
+        No Bio Found
+      </p>
+  </md-card-content>
+  <br>
+<md-select placeholder="Options" class="full-width" [(ngModel)] = "selectedTarget"  name="target">
+  <md-option *ngFor="let target of pre_data.targets_list" [value]="target">
+    {{target}}
+  </md-option>
+</md-select>
+<p class="center bold">or</p>
+<md-input-container class="full-width">
+  <input mdInput placeholder="Other" [(ngModel)]="inputTarget">
+</md-input-container>
+<div class="inline">
+  <button md-raised-button  [disabled]="selectedTarget==='' && inputTarget===''" (click)="update_data()">Save</button>
+  <md-spinner class="small" *ngIf="saving"></md-spinner>
+</div>
 </md-card>

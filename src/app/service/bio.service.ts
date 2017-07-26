@@ -16,13 +16,12 @@ export class BioService {
 
   getBio(): Observable<Bio> {
     return this.http.get(`${this.API_PATH}bio`)
-      .map(res => res.json().data || [])
-      .share();
+      .map((res:Response) => res.json().data || [])
   }
 
-  updateBio(data: Update_Bio) {
+  updateBio(data: Update_Bio) : any {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(`${this.API_PATH}target/`, data, options)
+    return this.http.post(`${this.API_PATH}target/`, data, options)
   }
 }
